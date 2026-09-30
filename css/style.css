@@ -1,0 +1,160 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --text: #1d2330;
+  --muted: #667085;
+  --border: #d9dde5;
+  --primary: #2556d9;
+  --in: #0f8a5f;
+  --out: #c2410c;
+  --ok-bg: #e7f6ef;
+  --warn-bg: #fff4e0;
+  --error: #b42318;
+  --error-bg: #fdecea;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", "Meiryo", sans-serif;
+  line-height: 1.6;
+}
+
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.5; }
+[hidden] { display: none !important; }
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.app-title { margin: 0; font-size: 1.15rem; }
+
+.tabs { display: flex; gap: 4px; }
+.tab {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+}
+.tab[aria-selected="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+.app-main { max-width: 960px; margin: 0 auto; padding: 24px 16px 64px; }
+
+.model-status {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--text);
+  color: #fff;
+  font-size: 0.9rem;
+  max-width: calc(100% - 32px);
+}
+.model-status.ready { background: var(--in); }
+.model-status.error { background: var(--error); }
+
+.btn-primary, .btn-secondary, .btn-danger {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-secondary { background: var(--surface); color: var(--primary); }
+.btn-danger { background: var(--surface); color: var(--error); border-color: var(--error); padding: 4px 12px; }
+
+.message { padding: 10px 14px; border-radius: 8px; margin: 12px 0; }
+.message.ok { background: var(--ok-bg); color: var(--in); }
+.message.error { background: var(--error-bg); color: var(--error); }
+
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.camera video {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  border-radius: var(--radius);
+  transform: scaleX(-1); /* 鏡のように表示 */
+  object-fit: cover;
+}
+.hint { margin: 0; font-size: 1.1rem; font-weight: 600; text-align: center; }
+.camera-actions { display: flex; gap: 8px; }
+
+/* 打刻 */
+.punch { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.clock { font-size: 2.5rem; font-weight: 700; font-variant-numeric: tabular-nums; text-align: center; }
+.clock small { display: block; font-size: 1rem; font-weight: 400; color: var(--muted); }
+.punch-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; max-width: 560px; }
+.btn-punch {
+  padding: 40px 0;
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.btn-punch.in { background: var(--in); }
+.btn-punch.out { background: var(--out); }
+.result {
+  width: 100%;
+  max-width: 560px;
+  padding: 40px 16px;
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+}
+.result.ok { background: var(--ok-bg); color: var(--in); }
+.result.warn { background: var(--warn-bg); color: var(--out); }
+.result.error { background: var(--error-bg); color: var(--error); }
+.result-title { margin: 0; font-size: 2rem; font-weight: 700; }
+.result-detail { margin: 8px 0 0; font-size: 1.5rem; }
+
+/* 従業員登録 */
+.register-form { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.register-form label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.register-form input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font: inherit; min-width: 240px; }
+.shots { display: flex; gap: 8px; }
+.shot { width: 14px; height: 14px; border-radius: 50%; background: var(--border); }
+.shot.done { background: var(--in); }
+.employee-list { list-style: none; padding: 0; margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.employee-list li { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.employee-list li:first-child { border-top: none; }
+.employee-name { font-weight: 600; flex: 1; overflow-wrap: anywhere; }
+.employee-date { color: var(--muted); font-size: 0.9rem; }
+.badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; background: var(--border); color: var(--muted); }
+.empty { color: var(--muted); padding: 12px 16px; }
+
+/* 勤怠一覧 */
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 16px; }
+.toolbar input { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font: inherit; }
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th { background: var(--bg); font-size: 0.9rem; color: var(--muted); }
+td.num { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 600px) {
+  .app-header { flex-direction: column; align-items: stretch; }
+  .tabs { justify-content: space-between; }
+  .tab { flex: 1; padding: 8px 4px; }
+  .btn-punch { padding: 28px 0; font-size: 1.6rem; }
+  .clock { font-size: 2rem; }
+}
